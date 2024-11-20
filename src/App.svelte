@@ -10,7 +10,7 @@
   import Loremipsum from "./components/Loremipsum.svelte"
 
   import atletas from "/src/data/atletas.json"
-  
+
   /* Variables para Transición animada */
   let atletasFiltered = atletas
   let count
@@ -20,6 +20,21 @@
   let top = 0.1
   let threshold = 0.5
   let bottom = 0.9
+
+  $: {
+    // Se ejecuta cuando cambia el valor de index
+    if (index === 0) {
+      atletasFiltered = atletas
+    } else if (index === 1) {
+      atletasFiltered = atletas.filter(d => d.genero === "F")
+    } else if (index === 2) {
+      atletasFiltered = atletas.filter(d => d.genero === "M")
+    } else if (index === 3) {
+      atletasFiltered = atletas.filter(d => d.continente === "América")
+    } else {
+      atletasFiltered = atletas
+    }
+  }
   /* Fin Transición animada */
 
   /* Variables para Secuencia gráfica */
@@ -27,7 +42,6 @@
   let offset2
   let charts = ["lines_01.png", "lines_02.png", "lines_03.png"]
   /* Fin para Secuencia gráfica */
-  
 </script>
 
 <main>
@@ -184,7 +198,6 @@
   <!---------------------->
   <!-- FIN Video Scroll -->
   <!---------------------->
-
 </main>
 
 <style>
